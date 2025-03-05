@@ -16,3 +16,8 @@ In general, students will do the following:
 3. Write a series of tests to illustrate the bug in a particular function
 4. Push their tests plus a "bug-fix" to create a true "red/green test"
 
+## License
+
+This project is licensed under the GNU General Public License v3.0 - see the
+[LICENSE](LICENSE) file for details.
+
