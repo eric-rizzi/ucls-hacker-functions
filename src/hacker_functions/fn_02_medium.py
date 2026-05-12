@@ -1,8 +1,48 @@
+def categorize_grade(grade: int) -> str:
+    """
+    Translate a number grade to a letter grade
+
+    Bug: Logic error due to an `elif` being mistyped as an `if`
+
+    :param grade: The current grade of the student as an integer
+    :returns: The string letter grade (e.g., "C+")
+    """
+    letter_grade = ""
+    if grade >= 97:
+        letter_grade = "A+"
+    if grade >= 93:
+        letter_grade = "A"
+    elif grade >= 90:
+        letter_grade = "A-"
+    elif grade >= 87:
+        letter_grade = "B+"
+    elif grade >= 83:
+        letter_grade = "B"
+    elif grade >= 80:
+        letter_grade = "B-"
+    elif grade >= 77:
+        letter_grade = "C+"
+    elif grade >= 73:
+        letter_grade = "C"
+    elif grade >= 70:
+        letter_grade = "C-"
+    elif grade >= 67:
+        letter_grade = "D+"
+    elif grade >= 63:
+        letter_grade = "D"
+    elif grade >= 60:
+        letter_grade = "D-"
+    else:
+        letter_grade = "F"
+
+    return letter_grade
+
+
 def capitalize_first(s: str) -> str:
     """
     Capitalize the first letter of a word/sentence
 
-    Bug: Fails when s is either empty
+    Bug: Fails when s is empty
 
     :param s: The word/sentence to capitalize
     :returns: The updated (capitalized) string
@@ -35,6 +75,22 @@ def find_middle(a: int, b: int, c: int) -> int:
         return a
     else:
         return b
+
+
+def is_palindrome(word: str) -> bool:
+    """
+    Checks whether a given word is a palindrome or not
+
+    Bug: Only checks whether the first letters are the same
+
+    :param word: The word to check for palindrome-ness
+    :returns: T/F of whether the word is a palindrome
+    """
+    for i in range(len(word) // 2):
+        if word[i] == word[-1 + -i]:
+            return True
+
+    return False
 
 
 def count_matches(l: list[str], word: str) -> int:
@@ -102,3 +158,20 @@ def max_number(numbers: list[int]) -> int:
         if num > max_num:
             max_num = num
     return max_num
+
+
+def sum_evens(numbers: list[int]) -> int:
+    """
+    Return the sum of all even numbers in the list.
+    For example, [1, 2, 3, 4, 5] should return 6 (2 + 4).
+
+    Bug: `total` isn't being added to
+ 
+    :param numbers: The list of integers to scan
+    :returns: The sum of the even numbers
+    """
+    total = 0
+    for n in numbers:
+        if n % 2 == 0:
+            total = n
+    return total

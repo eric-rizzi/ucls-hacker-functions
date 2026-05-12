@@ -1,3 +1,22 @@
+def run_command(command: str, *, is_admin: bool) -> str:
+    """
+    Simulate a classic permissions bug.
+
+    Bug: An oddly cased command that should require admin get's through
+
+    :param command: The command to run
+    :param is_admin: Whether the person is an admin user
+    :returns: The result of running the command - or a denial if requires admin
+    """
+    admin_only = ["remove", "download", "create"]
+    if not is_admin:
+        for c in admin_only:
+            if c.lower() == command or c.upper() == command:
+                return "Sorry, that's only for admin"
+
+    return f"Executed command {command.lower()}"
+
+
 def process_date(year: int) -> str:
     """
     Simulates the Y2k bug.
@@ -22,6 +41,22 @@ def process_date(year: int) -> str:
         return "Welcome to the 21st century!"
 
 
+def authenticate(password: str) -> bool:
+    """
+    Check if a given password matches the secret password. This function mimics
+    a "buffer overflow vulnerability", a classic error in languages like C.
+
+    Bug: A too long password "overflows"
+
+    :param password: The password check to see if it matches the secret
+    :returns: T/F about whether the password matches
+    """
+    buffer = [""] * 10
+    for i in range(len(password)):
+        buffer[i] = password[i]
+    return buffer == ["s", "e", "c", "r", "e", "t", "", "", "", ""]
+
+
 def attempt_replication(system_status: dict) -> list[str]:
     """
     Simulates the Morris Worm replication logic.
@@ -43,7 +78,7 @@ def attempt_replication(system_status: dict) -> list[str]:
     :returns: The effect of the run based on the state of the system
     """
 
-    result = []
+    result: list[str] = []
     # Logic to check if a system is already infected and supposed to stop replication.
     if system_status.get("infected", False):
         result.append("System already infected, stopping further replication.")

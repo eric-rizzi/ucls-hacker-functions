@@ -55,6 +55,7 @@ def can_ride_coaster(height: int, age: int) -> bool:
     """
     if height >= 48 or age >= 8:
         return True
+
     return False
 
 
@@ -149,52 +150,12 @@ def triangle_type(a: int, b: int, c: int) -> str:
     :returns: The type of triangle: Scalene, Equilateral, or Isosceles
     """
 
-    if a == b == c:
+    if a == b and a == c:
         return "Equilateral"
-    if a == b or b == c:
+    elif a == b or b == c:
         return "Isosceles"
     else:
         return "Scalene"
-
-
-def categorize_grade(grade: int) -> str:
-    """
-    Translate a number grade to a letter grade
-
-    Bug: Logic error due to an `elif` being mistyped as an `if`
-
-    :param grade: The current grade of the student as an integer
-    :returns: The string letter grade (e.g., "C+")
-    """
-    letter_grade = ""
-    if grade >= 97:
-        letter_grade = "A+"
-    if grade >= 93:
-        letter_grade = "A"
-    elif grade >= 90:
-        letter_grade = "A-"
-    elif grade >= 87:
-        letter_grade = "B+"
-    elif grade >= 83:
-        letter_grade = "B"
-    elif grade >= 80:
-        letter_grade = "B-"
-    elif grade >= 77:
-        letter_grade = "C+"
-    elif grade >= 73:
-        letter_grade = "C"
-    elif grade >= 70:
-        letter_grade = "C-"
-    elif grade >= 67:
-        letter_grade = "D+"
-    elif grade >= 63:
-        letter_grade = "D"
-    elif grade >= 60:
-        letter_grade = "D-"
-    else:
-        letter_grade = "F"
-
-    return letter_grade
 
 
 def count_vowels(word: str) -> int:
@@ -212,19 +173,3 @@ def count_vowels(word: str) -> int:
         if letter in vowels:
             count += 1
     return count
-
-
-def is_palindrome(word: str) -> bool:
-    """
-    Checks whether a given word is a palindrome or not
-
-    Bug: Only checks whether the first letters are the same
-
-    :param word: The word to check for palindrome-ness
-    :returns: T/F of whether the word is a palindrome
-    """
-    for i in range(len(word) // 2):
-        if word[i] == word[-1 + -i]:
-            return True
-
-    return False
