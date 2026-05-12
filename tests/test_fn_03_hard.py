@@ -1,53 +1,17 @@
 import pytest
 
 from hacker_functions.fn_03_hard import (
-    authenticate,
     convert_to_usd,
-    find_median,
     is_valid_email,
+    find_median,
     pair_items_in_list,
-    run_command,
     sum_of_digits,
+    count_unique,
+    remove_duplicates,
+    binary_search,
+    group_by_first_letter,
+    longest_streak,
 )
-
-
-def test_run_command_1() -> None:
-    assert run_command("remove", is_admin=True) == "Executed command remove"
-
-
-def test_run_command_2() -> None:
-    assert run_command("remove", is_admin=False) == "Sorry, that's only for admin"
-
-
-@pytest.mark.xfail(raises=AssertionError)
-def test_run_command_3() -> None:
-    assert run_command("rEmovE", is_admin=False) == "Sorry, that's only for admin"
-
-
-def test_is_valid_email_1() -> None:
-    assert is_valid_email("tmp@e.com") == True
-
-
-def test_is_valid_email_2() -> None:
-    assert is_valid_email("tmp.com") == False
-
-
-@pytest.mark.xfail(raises=AssertionError)
-def test_is_valid_email_3() -> None:
-    assert is_valid_email("tmp.e@com") == True
-
-
-def test_sum_of_digits_1() -> None:
-    assert sum_of_digits(1) == 1
-
-
-def test_sum_of_digits_2() -> None:
-    assert sum_of_digits(123) == 6
-
-
-@pytest.mark.xfail(raises=ValueError)
-def test_sum_of_digits_3() -> None:
-    assert sum_of_digits(-123) == 5
 
 
 def test_convert_to_usd_1() -> None:
@@ -63,26 +27,39 @@ def test_convert_to_usd_3() -> None:
     assert convert_to_usd(10, "HSD") == 10
 
 
-def test_authenticate_1() -> None:
-    assert authenticate("guess") == False
+def test_is_valid_email_1() -> None:
+    assert is_valid_email("tmp@e.com") == True
 
 
-def test_authenticate_2() -> None:
-    assert authenticate("secret") == True
+def test_is_valid_email_2() -> None:
+    assert is_valid_email("tmp.com") == False
 
 
-@pytest.mark.xfail(raises=IndexError)
-def test_authenticate_3() -> None:
-    assert authenticate("long password")
+@pytest.mark.xfail(raises=AssertionError)
+def test_is_valid_email_3() -> None:
+    assert is_valid_email("@e.com") == False
+
+
+def test_sum_of_digits_1() -> None:
+    assert sum_of_digits(1) == 1
+
+
+def test_sum_of_digits_2() -> None:
+    assert sum_of_digits(123) == 6
+
+
+@pytest.mark.xfail(raises=ValueError)
+def test_sum_of_digits_3() -> None:
+    assert sum_of_digits(-123) == 6
 
 
 def test_pair_items_in_list_1() -> None:
     assert pair_items_in_list([1, 2, 5, 9, 0, 0]) == [(1, 2), (5, 9), (0, 0)]
 
 
-@pytest.mark.xfail(raises=AssertionError)
+@pytest.mark.xfail(raises=IndexError)
 def test_pair_items_in_list_2() -> None:
-    assert pair_items_in_list([1, 2, 3]) == [(1, 2), (3, None)]
+    pair_items_in_list([1, 2, 3])
 
 
 def test_find_median_1() -> None:
@@ -96,3 +73,56 @@ def test_find_median_2() -> None:
 @pytest.mark.xfail(raises=AssertionError)
 def test_find_median_3() -> None:
     assert find_median([1, 2, 4, 5]) == 3
+
+
+def test_count_unique_1() -> None:
+    assert count_unique([1, 2, 3]) == 3
+
+
+def test_count_unique_2() -> None:
+    assert count_unique([1, 1, 1]) == 1
+
+
+@pytest.mark.xfail(raises=AssertionError)
+def test_count_unique_3() -> None:
+    assert count_unique([1, 2, 2, 3]) == 3
+
+
+def test_remove_duplicates_1() -> None:
+    assert remove_duplicates([1, 2, 3]) == [1, 2, 3]
+
+
+@pytest.mark.xfail(raises=AssertionError)
+def test_remove_duplicates_2() -> None:
+    assert remove_duplicates([1, 2, 1]) == [1, 2]
+
+
+def test_binary_search_1() -> None:
+    assert binary_search([1, 3, 5, 7, 9], 5) == 2
+
+
+def test_binary_search_2() -> None:
+    assert binary_search([1, 3, 5, 7, 9], 4) == -1
+
+
+@pytest.mark.xfail(raises=AssertionError)
+def test_binary_search_3() -> None:
+    assert binary_search([1, 3, 5, 7, 9], 9) == 4
+
+
+def test_group_by_first_letter_1() -> None:
+    assert group_by_first_letter(["apple", "ant"]) == {"a": ["apple", "ant"]}
+
+
+@pytest.mark.xfail(raises=IndexError)
+def test_group_by_first_letter_2() -> None:
+    group_by_first_letter(["apple", ""])
+
+
+def test_longest_streak_1() -> None:
+    assert longest_streak([1, 1, 2, 2, 2, 3]) == 3
+
+
+@pytest.mark.xfail(raises=AssertionError)
+def test_longest_streak_2() -> None:
+    assert longest_streak([5]) == 1

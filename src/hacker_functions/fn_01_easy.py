@@ -94,12 +94,13 @@ def first_and_last(items: list[int]) -> tuple[int, int]:
 def days_in_month(month: int) -> int:
     """
     Return the number of days in a given month. February is assumed to have
-    28 days (ignore leap years). Months are numbered 1-12.
+    28 days (ignore leap years). Months are numbered 1-12. Returns -1 for
+    invalid months.
 
     Bug: Handles nonsensical months
  
     :param month: The month number (1 = January, 12 = December)
-    :returns: The number of days in that month
+    :returns: The number of days in that month, or -1 if invalid
     """
     if month in [1, 3, 5, 7, 8, 10, 12]:
         return 31
@@ -134,7 +135,7 @@ def last_word(sentence: str) -> str:
     :param sentence: The sentence to extract the last word from
     :returns: The last word in the sentence
     """
-    words = sentence.split(" ")
+    words = sentence.split()
     return words[-1]
 
 

@@ -1,13 +1,29 @@
 import pytest
 
 from hacker_functions.fn_02_medium import (
+    categorize_grade,
     capitalize_first,
+    find_middle,
+    is_palindrome,
     count_matches,
     find_in_list,
-    find_middle,
     max_number,
     strings_are_equal,
+    sum_evens,
 )
+
+
+def test_categorize_grade_1() -> None:
+    assert categorize_grade(60) == "D-"
+
+
+def test_categorize_grade_2() -> None:
+    assert categorize_grade(95) == "A"
+
+
+@pytest.mark.xfail(raises=AssertionError)
+def test_categorize_grade_3() -> None:
+    assert categorize_grade(97) == "A+"
 
 
 def test_capitalize_first_1() -> None:
@@ -38,6 +54,19 @@ def test_find_middle_3() -> None:
 @pytest.mark.xfail(raises=AssertionError)
 def test_find_middle_4() -> None:
     assert find_middle(10, 4, 10) == 10
+
+
+def test_is_palindrome_1() -> None:
+    assert is_palindrome("hello") == False
+
+
+def test_is_palindrome_2() -> None:
+    assert is_palindrome("racecar") == True
+
+
+@pytest.mark.xfail(raises=AssertionError)
+def test_is_palindrome_3() -> None:
+    assert is_palindrome("yummy") == False
 
 
 def test_count_matches_1() -> None:
@@ -89,4 +118,17 @@ def test_max_number_2() -> None:
 
 @pytest.mark.xfail(raises=IndexError)
 def test_max_number_3() -> None:
-    assert max_number([]) == True
+    max_number([])
+
+
+def test_sum_evens_1() -> None:
+    assert sum_evens([1, 2, 3]) == 2
+
+
+def test_sum_evens_2() -> None:
+    assert sum_evens([1, 3, 5]) == 0
+
+
+@pytest.mark.xfail(raises=AssertionError)
+def test_sum_evens_3() -> None:
+    assert sum_evens([2, 4, 6]) == 12

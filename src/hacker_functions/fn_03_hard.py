@@ -17,7 +17,7 @@ def is_valid_email(email: str) -> bool:
     """
     Determines whether a given string is a valid email address
 
-    Bug: Doesn't check that there's anything before the @
+    Bug: Doesn't validate that there's content before the @
 
     :param email: Potential email address
     :returns: T/F about whether the `email` was a valid email address
@@ -45,7 +45,7 @@ def pair_items_in_list(items: list[int]) -> list[tuple[int, int]]:
 
     For example [1, 5, 7, 4] -> [(1, 5), (7, 4)].
 
-    Bug: Off-by-one error that manifests only if the list length is odd
+    Bug: Crashes with IndexError when the list has an odd number of items
 
     :param items: The list of items to "pair up"
     :returns: The list of paired items
@@ -53,7 +53,7 @@ def pair_items_in_list(items: list[int]) -> list[tuple[int, int]]:
     processed: list[tuple[int, int]] = []
 
     i = 0
-    while i < len(items) - 1:
+    while i < len(items):
         # Processes in pairs
         processed.append((items[i], items[i + 1]))
         i += 2

@@ -264,3 +264,120 @@ class Therac25:
         print("Resetting machine...")
         self.machine_state = "idle"
         self.safety_checks_passed = False
+
+
+def zune_day_of_year(days: int) -> tuple[int, int]:
+    """
+    Simulates the Zune leap year bug that froze every Zune on Dec 31, 2008.
+
+    The Zune's clock driver converted an absolute day count into a year and
+    day-of-year. On the last day of a leap year (day 366), the while loop
+    would never terminate because it checked `days > 365` but didn't handle
+    the case where days equals exactly 366.
+
+    Historical Impact:
+    - Every Zune device worldwide froze simultaneously on December 31, 2008
+      and didn't recover until the next day when the day count incremented.
+
+    Bug: Infinite loop when days == 366 (last day of a leap year)
+
+    :param days: Total number of days since some epoch
+    :returns: A tuple of (year, remaining_days_in_year)
+    """
+    year = 1980
+    while days > 365:
+        if year % 4 == 0:
+            if days > 366:
+                days -= 366
+                year += 1
+        else:
+            days -= 365
+            year += 1
+    return (year, days)
+
+
+def log_message(message: str) -> str:
+    """
+    Simulates the Log4Shell vulnerability (CVE-2021-44228).
+
+    Log4j, a ubiquitous Java logging library, would evaluate special syntax
+    in log messages as code lookups. An attacker could send a crafted string
+    like "${exploit}" as user input, and the logger would execute it.
+
+    Historical Impact:
+    - Affected virtually every Java application using Log4j (millions of systems).
+    - Rated 10/10 on the CVSS severity scale.
+    - Exploited within hours of disclosure; patching took weeks across the industry.
+
+    Bug: User-provided input is evaluated rather than treated as plain text
+
+    :param message: The message to log
+    :returns: The formatted log entry
+    """
+    if message.startswith("${") and message.endswith("}"):
+        return eval(message[2:-1])
+    return f"[LOG] {message}"
+
+
+class MarsPathfinder:
+    """
+    Simulates the Mars Pathfinder priority inversion bug (1997).
+
+    The Pathfinder's software had three tasks: a high-priority bus task, a
+    medium-priority communications task, and a low-priority meteorological
+    task. The low-priority task would acquire a shared resource (the data bus),
+    then the medium-priority task would preempt it (since medium > low),
+    preventing the low-priority task from releasing the resource. The
+    high-priority task would then starve waiting for the resource.
+
+    Historical Impact:
+    - Caused repeated system resets on Mars, nearly jeopardizing the mission.
+    - Engineers diagnosed and patched the bug via a remote upload from Earth.
+
+    Bug: Medium-priority task preempts low, causing high to starve
+
+    :method run_cycle: Processes all pending tasks and returns their outputs
+    """
+
+    def __init__(self):
+        self.resource_held_by: str | None = None
+        self.tasks: list[tuple[str, int]] = []
+
+    def add_task(self, name: str, priority: int) -> None:
+        """
+        Add a task to the queue. Higher number = higher priority.
+
+        :param name: Task name
+        :param priority: Task priority (higher is more important)
+        """
+        self.tasks.append((name, priority))
+
+    def run_cycle(self) -> list[str]:
+        """
+        Process tasks. Low-priority tasks acquire the shared resource.
+        High-priority tasks need the resource. Medium-priority tasks
+        don't need it but run before low can finish.
+
+        :returns: List of task results in execution order
+        """
+        results: list[str] = []
+        # Sort by priority (highest first)
+        self.tasks.sort(key=lambda t: t[1], reverse=True)
+
+        for name, priority in self.tasks:
+            if priority == 1:
+                # Low priority: acquires resource
+                self.resource_held_by = name
+                results.append(f"{name}: acquired resource")
+            elif priority == 2:
+                # Medium priority: runs, preempts low from releasing
+                results.append(f"{name}: running (preempted low)")
+            elif priority == 3:
+                # High priority: needs resource
+                if self.resource_held_by is not None:
+                    results.append(f"{name}: BLOCKED waiting for resource")
+                else:
+                    results.append(f"{name}: acquired resource and completed")
+
+        self.tasks = []
+        return results
