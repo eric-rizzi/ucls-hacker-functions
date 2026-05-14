@@ -1,3 +1,6 @@
+import ctypes
+
+
 def run_command(command: str, *, is_admin: bool) -> str:
     """
     Simulate a classic permissions bug.
@@ -43,18 +46,40 @@ def process_date(year: int) -> str:
 
 def authenticate(password: str) -> bool:
     """
-    Check if a given password matches the secret password. This function mimics
-    a "buffer overflow vulnerability", a classic error in languages like C.
+    Check if a given password matches the secret. This function mimics the
+    classic "stack-smashing" buffer overflow that plagued C programs for
+    decades.
 
-    Bug: A too long password "overflows"
+    In C, local variables sit adjacent in memory. A fixed-size password buffer
+    followed by an `is_authenticated` flag can be exploited: writing past the
+    end of the buffer overwrites the flag, authenticating the attacker without
+    them ever knowing the real password.
 
-    :param password: The password check to see if it matches the secret
-    :returns: T/F about whether the password matches
+    Historical Impact:
+    - Buffer overflows underlie many of the most damaging CVEs in history,
+      including the Morris Worm, Code Red, and SQL Slammer.
+    - Memory-safe languages (Rust, Go, Python) exist in large part to make
+      this class of bug impossible.
+
+    Bug: Unchecked copy lets a long password clobber the auth flag
+
+    :param password: The password to check
+    :returns: T/F about whether authentication succeeded
     """
-    buffer = [""] * 10
+    # Simulated stack frame: 10-char buffer, then the auth flag, then padding.
+    # In C, these locals would sit at adjacent memory addresses.
+    stack: list = [""] * 10 + [False] + [""] * 100  # auth flag lives at index 10
+
+    # Copy password into the buffer with no bounds check - the classic C
+    # strcpy() mistake. Writes past index 9 clobber stack[10] and beyond.
     for i in range(len(password)):
-        buffer[i] = password[i]
-    return buffer == ["s", "e", "c", "r", "e", "t", "", "", "", ""]
+        stack[i] = password[i]
+
+    # Validate the buffer contents against the secret.
+    if stack[:10] == ["s", "e", "c", "r", "e", "t", "", "", "", ""]:
+        stack[10] = True
+
+    return bool(stack[10])
 
 
 def attempt_replication(system_status: dict) -> list[str]:
@@ -92,68 +117,64 @@ def attempt_replication(system_status: dict) -> list[str]:
 
 def read_memory(location: str, length: int) -> str:
     """
-    Simulates the Heartbleed bug by allowing reads beyond buffer limits.
+    Simulates the Heartbleed bug (CVE-2014-0160) by reading past a buffer's
+    declared size into adjacent memory.
 
-    In the actual Heartbleed bug, a flaw in the OpenSSL's implementation of the
-    TLS heartbeat protocol allowed attackers to read memory up to 64kB beyond
-    the end of a buffer.
+    The actual Heartbleed bug was in OpenSSL's TLS heartbeat: clients sent a
+    (payload, length) pair, and the server returned `length` bytes from the
+    buffer holding `payload` - without verifying that `length` matched the
+    actual payload size. An attacker could request far more bytes than they
+    sent and get back whatever happened to be adjacent in memory: private
+    keys, session tokens, passwords.
 
     Historical Impact:
-    - Allowed attackers to steal protected information such as private keys and
-      personal data.
-    - Affected millions of websites and highlighted vulnerabilities in widely
-      used security protocols.
+    - Allowed attackers to steal protected information such as private keys
+      and personal data.
+    - Affected an estimated 17% of secure web servers and forced an
+      industry-wide certificate rotation.
 
-    Bug: Missing boundary/length check
+    Bug: `length` is never clamped to the region's declared size
 
-    :param location: The location from which to read data
-    :param length: How much of the data to read from the given location
-    :returns: The result of the read
+    :param location: Which named region to read from
+    :param length: How many characters to read
+    :returns: The bytes read - possibly including adjacent secret data
     """
-    memory = {"safe": "This is safe data", "overflow": "Sensitive data leaked!"}
-    return memory.get(location, "")[:length]
+    # Simulated linear memory: a public region sits directly before secret data.
+    memory = "This is safe data" + "SECRET_KEY=hunter2-private"
+    regions = {
+        "safe": (0, 17),  # public region: offset 0, declared size 17
+    }
+    start, _declared_size = regions[location]
+    # Bug: returns `length` bytes starting at `start` without ever clamping
+    # `length` to `_declared_size`. A large read spills into the secret.
+    return memory[start : start + length]
 
 
 def calculate_velocity_change(current_velocity: float) -> int:
     """
     Simulates the bug that caused the Ariane 5 rocket's flight 501 failure.
 
-    The rocket's software attempted to convert a large 64-bit float (current
-    velocity) to a 16-bit signed integer to check if it exceeded a certain threshold.
-    This conversion was supposed to be safe because the values in testing (from
-    Ariane 4) were within the range of 16-bit integers. However, Ariane 5's
-    higher velocity caused an overflow.
+    The rocket's software converted a 64-bit float (current velocity) into a
+    16-bit signed integer. On Ariane 4 this was safe - velocities never
+    exceeded the 16-bit range (-32768 to 32767). On Ariane 5, which was
+    faster, the cast silently overflowed: large positive values wrapped to
+    large negative ones via two's-complement arithmetic.
 
     Historical Impact:
-    - The overflow resulted in a hardware exception, which caused the inertial
-      navigation system to fail.
-    - This led to the self-destruction of the rocket shortly after liftoff,
-      resulting in a total loss estimated at $370 million.
+    - The overflow caused a hardware exception in the inertial navigation
+      system. The flight control computer interpreted the diagnostic output
+      as flight data and commanded a sharp pitch correction, breaking the
+      rocket apart about 40 seconds after launch.
+    - Total loss estimated at $370 million.
 
-    Bug: Conversion from 64-bit to 16-bit causes issues
+    Bug: 64-bit float is truncated to 16-bit signed int with no range check
 
-    :params current_velocity: The current velocity of the rocket
-    :returns: The outgoing velocity after compensation
+    :param current_velocity: The current velocity of the rocket
+    :returns: The velocity as represented in the 16-bit register
     """
-    try:
-        # Simulate velocity data handling and casting to a smaller data type.
-        # Cast to int to simulate the effect of handling in a lower precision system.
-        velocity_integer = int(current_velocity)
-
-        # The threshold for decision making is based on the range of a 16-bit signed integer.
-        if velocity_integer > 32767 or velocity_integer < -32768:
-            raise OverflowError("Velocity exceeds operational limits.")
-
-        # Simulate checking velocity against a critical threshold.
-        if velocity_integer > 30000:
-            print("Critical velocity threshold exceeded. Adjusting course.")
-        else:
-            print("Velocity within normal operational limits.")
-
-    except OverflowError as e:
-        print(f"Error: {str(e)} - Triggering emergency shutdown sequence.")
-
-    return velocity_integer
+    # Unchecked cast: writing a value outside [-32768, 32767] into a c_int16
+    # silently wraps modulo 2**16, exactly as the Ariane 5's hardware did.
+    return ctypes.c_int16(int(current_velocity)).value
 
 
 class PentiumProcessor:
@@ -229,6 +250,12 @@ class Therac25:
       hardware safety checks in medical devices.
 
     Bug: Race condition allows for system to be in incorrect/dangerous state
+
+    Testing Note: The simulation below renders the bug as ordinary if/then logic
+    so it can be exposed by a unit test. The real Therac-25 bug was a race
+    condition between concurrent threads, which no unit test could reliably
+    catch. Bugs of this class require integration tests, fault injection, or
+    formal verification - a reminder that unit testing has real limits.
     """
 
     def __init__(self):
@@ -335,6 +362,14 @@ class MarsPathfinder:
     - Engineers diagnosed and patched the bug via a remote upload from Earth.
 
     Bug: Medium-priority task preempts low, causing high to starve
+
+    Testing Note: The simulation below renders the bug as ordinary if/then logic
+    so it can be exposed by a unit test. The real Pathfinder bug was a priority
+    inversion between concurrent tasks scheduled by a real-time OS - it
+    surfaced only on Mars and could not have been caught by a unit test on
+    Earth. Bugs of this class require integration tests, stress testing in a
+    flight-like environment, or formal scheduling analysis - a reminder that
+    unit testing has real limits.
 
     :method run_cycle: Processes all pending tasks and returns their outputs
     """

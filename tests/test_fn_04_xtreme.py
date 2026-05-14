@@ -46,9 +46,10 @@ def test_authenticate_2() -> None:
     assert authenticate("secret") == True
 
 
-@pytest.mark.xfail(raises=IndexError)
+@pytest.mark.xfail(raises=AssertionError)
 def test_authenticate_3() -> None:
-    assert authenticate("long password")
+    # A long wrong password shouldn't authenticate, but the overflow lets it through
+    assert authenticate("xxxxxxxxxxx") == False
 
 
 def test_attempt_replication_1() -> None:
@@ -70,7 +71,8 @@ def test_read_memory_1() -> None:
 
 @pytest.mark.xfail(raises=AssertionError)
 def test_read_memory_2() -> None:
-    assert "Sensitive" not in read_memory("overflow", 100)
+    # Reads longer than the region's declared size should be clamped, but aren't
+    assert "SECRET" not in read_memory("safe", 100)
 
 
 def test_calculate_velocity_change_1() -> None:
@@ -79,7 +81,8 @@ def test_calculate_velocity_change_1() -> None:
 
 @pytest.mark.xfail(raises=AssertionError)
 def test_calculate_velocity_change_2() -> None:
-    assert calculate_velocity_change(40000) <= 32767
+    # A positive input velocity should not produce a negative output
+    assert calculate_velocity_change(40000) > 0
 
 
 def test_pentium_processor_1() -> None:
