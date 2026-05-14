@@ -29,9 +29,6 @@ def test_run_command_3() -> None:
     assert run_command("rEmovE", is_admin=False) == "Sorry, that's only for admin"
 
 
-# TODO: process_date
-
-
 def test_process_date_1() -> None:
     assert process_date(2025) == "Welcome to the 21st century!"
 
@@ -54,9 +51,6 @@ def test_authenticate_3() -> None:
     assert authenticate("long password")
 
 
-# TODO: attempt_replication,
-
-
 def test_attempt_replication_1() -> None:
     status = {"connected": True, "infected": False}
     result = attempt_replication(status)
@@ -70,9 +64,6 @@ def test_attempt_replication_2() -> None:
     assert len(result) == 1
 
 
-# TODO: read_memory,
-
-
 def test_read_memory_1() -> None:
     assert read_memory("safe", 4) == "This"
 
@@ -82,9 +73,6 @@ def test_read_memory_2() -> None:
     assert "Sensitive" not in read_memory("overflow", 100)
 
 
-# TODO: calculate_velocity_change,
-
-
 def test_calculate_velocity_change_1() -> None:
     assert calculate_velocity_change(100) == 100
 
@@ -92,9 +80,6 @@ def test_calculate_velocity_change_1() -> None:
 @pytest.mark.xfail(raises=AssertionError)
 def test_calculate_velocity_change_2() -> None:
     assert calculate_velocity_change(40000) <= 32767
-
-
-# TODO: PentiumProcessor,
 
 
 def test_pentium_processor_1() -> None:
@@ -110,9 +95,6 @@ def test_pentium_processor_2() -> None:
     assert p.divide(824633702441, 824633702441) == 1.0
 
 
-# TODO: MarsClimateOrbiter,
-
-
 def test_mars_climate_orbiter_1() -> None:
     m = MarsClimateOrbiter()
     m.update_altitude(100000)
@@ -126,9 +108,6 @@ def test_mars_climate_orbiter_2() -> None:
     assert m.check_entry_conditions() == "Altitude within safe limits."
 
 
-# TODO: Therac25,
-
-
 def test_therac25_1() -> None:
     t = Therac25()
     t.set_mode("low")
@@ -140,9 +119,6 @@ def test_therac25_2() -> None:
     t = Therac25()
     t.set_mode("high")
     assert t.activate() == "Machine activated safely."
-
-
-# TODO: zune_day_of_year
 
 
 def test_zune_day_of_year_1() -> None:
@@ -166,9 +142,6 @@ def test_zune_day_of_year_2() -> None:
         pytest.fail("Infinite loop detected")
 
 
-# TODO: log_message
-
-
 def test_log_message_1() -> None:
     assert log_message("hello") == "[LOG] hello"
 
@@ -177,9 +150,6 @@ def test_log_message_1() -> None:
 def test_log_message_2() -> None:
     result = log_message("${1+1}")
     assert result == "[LOG] ${1+1}"
-
-
-# TODO: MarsPathfinder
 
 
 def test_mars_pathfinder_1() -> None:

@@ -168,6 +168,8 @@ def longest_streak(numbers: list[int]) -> int:
     Return the length of the longest streak of consecutive equal numbers.
     For example, [1, 1, 2, 2, 2, 3, 3] should return 3 (the three 2's).
 
+    Bug: Returns 0 for single-element lists
+
     :param numbers: The list of integers to scan
     :returns: The length of the longest run of equal consecutive values
     """
