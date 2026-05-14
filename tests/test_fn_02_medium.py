@@ -1,12 +1,12 @@
 import pytest
 
 from hacker_functions.fn_02_medium import (
-    categorize_grade,
     capitalize_first,
-    find_middle,
-    is_palindrome,
+    categorize_grade,
     count_matches,
     find_in_list,
+    find_middle,
+    is_palindrome,
     max_number,
     strings_are_equal,
     sum_evens,

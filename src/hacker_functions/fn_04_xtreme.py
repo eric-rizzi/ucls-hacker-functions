@@ -253,10 +253,7 @@ class Therac25:
         if self.machine_state == "setup_high" and not self.safety_checks_passed:
             self.machine_state = "error"
             return "Safety checks not performed: ERROR! Potential for unsafe radiation levels."
-        elif (
-            self.machine_state in ["setup_low", "setup_high"]
-            and self.safety_checks_passed
-        ):
+        elif self.machine_state in ["setup_low", "setup_high"] and self.safety_checks_passed:
             self.machine_state = "delivering_treatment"
             return "Machine activated safely."
         else:

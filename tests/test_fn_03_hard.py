@@ -1,16 +1,16 @@
 import pytest
 
 from hacker_functions.fn_03_hard import (
-    convert_to_usd,
-    is_valid_email,
-    find_median,
-    pair_items_in_list,
-    sum_of_digits,
-    count_unique,
-    remove_duplicates,
     binary_search,
+    convert_to_usd,
+    count_unique,
+    find_median,
     group_by_first_letter,
+    is_valid_email,
     longest_streak,
+    pair_items_in_list,
+    remove_duplicates,
+    sum_of_digits,
 )
 
 

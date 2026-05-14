@@ -1,16 +1,16 @@
 import pytest
 
 from hacker_functions.fn_01_easy import (
-    shipping_cost,
-    rock_paper_scissors,
-    can_ride_coaster,
     average,
-    first_and_last,
-    days_in_month,
+    can_ride_coaster,
     contains_an_a,
-    last_word,
-    triangle_type,
     count_vowels,
+    days_in_month,
+    first_and_last,
+    last_word,
+    rock_paper_scissors,
+    shipping_cost,
+    triangle_type,
 )
 
 

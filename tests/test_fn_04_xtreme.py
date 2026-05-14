@@ -1,18 +1,18 @@
 import pytest
 
 from hacker_functions.fn_04_xtreme import (
-    run_command,
-    process_date,
-    authenticate,
-    attempt_replication,
-    read_memory,
-    calculate_velocity_change,
-    PentiumProcessor,
     MarsClimateOrbiter,
-    Therac25,
-    zune_day_of_year,
-    log_message,
     MarsPathfinder,
+    PentiumProcessor,
+    Therac25,
+    attempt_replication,
+    authenticate,
+    calculate_velocity_change,
+    log_message,
+    process_date,
+    read_memory,
+    run_command,
+    zune_day_of_year,
 )
 
 
