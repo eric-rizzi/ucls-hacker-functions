@@ -2,8 +2,6 @@ def run_command(command: str, *, is_admin: bool) -> str:
     """
     Simulate a classic permissions bug.
 
-    Bug: An oddly cased command that should require admin get's through
-
     :param command: The command to run
     :param is_admin: Whether the person is an admin user
     :returns: The result of running the command - or a denial if requires admin
@@ -29,8 +27,6 @@ def process_date(year: int) -> str:
     - Prompted a massive overhaul of computer systems worldwide.
     - Estimated costs for fixes and checks were in the billions of dollars.
 
-    Bug: The code only considers the last two digits of the year
-
     :param year: The year
     :returns: A greeting based on what century the system thinks we're in
     """
@@ -45,8 +41,6 @@ def authenticate(password: str) -> bool:
     """
     Check if a given password matches the secret password. This function mimics
     a "buffer overflow vulnerability", a classic error in languages like C.
-
-    Bug: A too long password "overflows"
 
     :param password: The password check to see if it matches the secret
     :returns: T/F about whether the password matches
@@ -71,8 +65,6 @@ def attempt_replication(system_status: dict) -> list[str]:
       6,000 computers to be slowed down or crashed.
     - This incident highlighted the need for greater network security measures
       and resulted in the creation of the first CERT Coordination Center.
-
-    Bug: Missing return leads to multiple infections
 
     :param system_status: A dictionary representing the state of the system
     :returns: The effect of the run based on the state of the system
@@ -104,8 +96,6 @@ def read_memory(location: str, length: int) -> str:
     - Affected millions of websites and highlighted vulnerabilities in widely
       used security protocols.
 
-    Bug: Missing boundary/length check
-
     :param location: The location from which to read data
     :param length: How much of the data to read from the given location
     :returns: The result of the read
@@ -129,8 +119,6 @@ def calculate_velocity_change(current_velocity: float) -> int:
       navigation system to fail.
     - This led to the self-destruction of the rocket shortly after liftoff,
       resulting in a total loss estimated at $370 million.
-
-    Bug: Conversion from 64-bit to 16-bit causes issues
 
     :params current_velocity: The current velocity of the rocket
     :returns: The outgoing velocity after compensation

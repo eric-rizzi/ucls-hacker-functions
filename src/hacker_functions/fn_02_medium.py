@@ -2,8 +2,6 @@ def categorize_grade(grade: int) -> str:
     """
     Translate a number grade to a letter grade
 
-    Bug: Logic error due to an `elif` being mistyped as an `if`
-
     :param grade: The current grade of the student as an integer
     :returns: The string letter grade (e.g., "C+")
     """
@@ -42,8 +40,6 @@ def capitalize_first(s: str) -> str:
     """
     Capitalize the first letter of a word/sentence
 
-    Bug: Fails when s is empty
-
     :param s: The word/sentence to capitalize
     :returns: The updated (capitalized) string
     """
@@ -55,8 +51,6 @@ def find_middle(a: int, b: int, c: int) -> int:
     Find the second largest of three numbers. For example, given the inputs
     (3, 6, 5), the function would return 5 since it's the second largest -
     middle number.
-
-    Bug: Doesn't check for <=
 
     :param a: First integer
     :param b: Second integer
@@ -81,8 +75,6 @@ def is_palindrome(word: str) -> bool:
     """
     Checks whether a given word is a palindrome or not
 
-    Bug: Only checks whether the first letters are the same
-
     :param word: The word to check for palindrome-ness
     :returns: T/F of whether the word is a palindrome
     """
@@ -97,8 +89,6 @@ def count_matches(l: list[str], word: str) -> int:
     """
     Count the number of times a given word appears in a list of words
 
-    Bug: Off by one error
-
     :param l: The list of strings/words
     :param word: The word to look for matches for
     """
@@ -112,8 +102,6 @@ def count_matches(l: list[str], word: str) -> int:
 def find_in_list(lst: list[int], item: int) -> bool:
     """
     Determines whether a given item appears in a list
-
-    Bug: Function returns False too early
 
     :param lst: A list of integers
     :param item: The item to look for in the list
@@ -131,8 +119,6 @@ def strings_are_equal(s1: str, s2: str) -> bool:
     """
     Determine whether two strings are equal
 
-    Bug: Assumes the strings are of equal length
-
     :param s1: The first string
     :param s2: The second string
     :returns: T/F of whether the two strings are equal
@@ -148,8 +134,6 @@ def max_number(numbers: list[int]) -> int:
     """
     Find the largest number in a list of integers
 
-    Bug: Assumes that the list is non-empty
-
     :param numbers: List of numbers
     :returns: The largest integer in the list of numbers
     """
@@ -164,8 +148,6 @@ def sum_evens(numbers: list[int]) -> int:
     """
     Return the sum of all even numbers in the list.
     For example, [1, 2, 3, 4, 5] should return 6 (2 + 4).
-
-    Bug: `total` isn't being added to
 
     :param numbers: The list of integers to scan
     :returns: The sum of the even numbers

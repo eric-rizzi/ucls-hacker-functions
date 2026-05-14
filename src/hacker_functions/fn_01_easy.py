@@ -3,8 +3,6 @@ def shipping_cost(weight: int, is_member: bool) -> float:
     Calculate the shipping cost for a package. Members get a 50% discount.
     Packages 5 pounds or under cost $10. Packages over 5 pounds cost $20.
 
-    Bug: Should be `<=` in first comparison
-
     :param weight: The weight of the package in pounds
     :param is_member: Whether the customer is a member
     :returns: The shipping cost as a float
@@ -26,8 +24,6 @@ def rock_paper_scissors(player: str, opponent: str) -> str:
     if the player wins, "opponent" if the opponent wins, and "tie" if both
     chose the same thing.
 
-    Bug: Missing one of the key conditions for victory
-
     :param player: The player's choice ("rock", "paper", or "scissors")
     :param opponent: The opponent's choice ("rock", "paper", or "scissors")
     :returns: "player", "opponent", or "tie"
@@ -47,8 +43,6 @@ def can_ride_coaster(height: int, age: int) -> bool:
     Determine whether someone can ride the roller coaster. A rider must be
     at least 48 inches tall AND at least 8 years old.
 
-    Bug: Should be `and` instead of `or`
-
     :param height: The rider's height in inches
     :param age: The rider's age in years
     :returns: T/F about whether the rider can ride
@@ -62,8 +56,6 @@ def can_ride_coaster(height: int, age: int) -> bool:
 def average(numbers: list[int]) -> float:
     """
     Get the average of a list of integers. Returns 0 if the list is empty.
-
-    Bug: Guard doesn't work so get DivisionByZero
 
     :param numbers: List of integers
     :returns: Float representing the average
@@ -80,8 +72,6 @@ def first_and_last(items: list[int]) -> tuple[int, int]:
     For example, [3, 7, 2, 9] should return (3, 9). If there
     are less than 2 items, return (0, 0)
 
-    Bug: Returns first and second rather than first and last
-
     :param items: The list to extract from
     :returns: A tuple of (first item, last item)
     """
@@ -97,8 +87,6 @@ def days_in_month(month: int) -> int:
     28 days (ignore leap years). Months are numbered 1-12. Returns -1 for
     invalid months.
 
-    Bug: Handles nonsensical months
-
     :param month: The month number (1 = January, 12 = December)
     :returns: The number of days in that month, or -1 if invalid
     """
@@ -112,8 +100,6 @@ def days_in_month(month: int) -> int:
 def contains_an_a(word: str) -> bool:
     """
     Checks whether a given string contains an "a" character
-
-    Bug: Assumes that words can't be over 100 chars in length
 
     :param word: The word/string to check for an "a"
     :returns: T/F about whether an "a" was found
@@ -130,8 +116,6 @@ def last_word(sentence: str) -> str:
     Return the last word in a sentence. Words are separated by spaces.
     For example, "hello there friend" should return "friend".
 
-    Bug: Breaks for an empty string
-
     :param sentence: The sentence to extract the last word from
     :returns: The last word in the sentence
     """
@@ -142,8 +126,6 @@ def last_word(sentence: str) -> str:
 def triangle_type(a: int, b: int, c: int) -> str:
     """
     Determine the type of a triangle based on the length of three sides
-
-    Bug: Misses a case where `c == a`
 
     :param a: Length of side a
     :param b: Length of side b
@@ -162,8 +144,6 @@ def triangle_type(a: int, b: int, c: int) -> str:
 def count_vowels(word: str) -> int:
     """
     Count the number of vowels in a given word
-
-    Bug: Doesn't account for upper-case letters
 
     :param word: The word to count vowels in
     :returns: The number of vowels in the word

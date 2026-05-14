@@ -21,9 +21,9 @@ def test_categorize_grade_2() -> None:
     assert categorize_grade(95) == "A"
 
 
-@pytest.mark.xfail(raises=AssertionError)
+@pytest.mark.xfail(strict=True)
 def test_categorize_grade_3() -> None:
-    assert categorize_grade(97) == "A+"
+    "YOUR TEST THAT CAUSES A FAILURE HERE"
 
 
 def test_capitalize_first_1() -> None:
@@ -34,9 +34,9 @@ def test_capitalize_first_2() -> None:
     assert capitalize_first("eric") == "Eric"
 
 
-@pytest.mark.xfail(raises=IndexError)
+@pytest.mark.xfail(strict=True)
 def test_capitalize_first_3() -> None:
-    assert capitalize_first("")
+    "YOUR TEST THAT CAUSES A FAILURE HERE"
 
 
 def test_find_middle_1() -> None:
@@ -51,9 +51,9 @@ def test_find_middle_3() -> None:
     assert find_middle(10, 4, 8) == 8
 
 
-@pytest.mark.xfail(raises=AssertionError)
+@pytest.mark.xfail(strict=True)
 def test_find_middle_4() -> None:
-    assert find_middle(10, 4, 10) == 10
+    "YOUR TEST THAT CAUSES A FAILURE HERE"
 
 
 def test_is_palindrome_1() -> None:
@@ -64,9 +64,9 @@ def test_is_palindrome_2() -> None:
     assert is_palindrome("racecar") == True
 
 
-@pytest.mark.xfail(raises=AssertionError)
+@pytest.mark.xfail(strict=True)
 def test_is_palindrome_3() -> None:
-    assert is_palindrome("yummy") == False
+    "YOUR TEST THAT CAUSES A FAILURE HERE"
 
 
 def test_count_matches_1() -> None:
@@ -77,9 +77,9 @@ def test_count_matches_2() -> None:
     assert count_matches(["hey", "you"], "hey") == 1
 
 
-@pytest.mark.xfail(raises=AssertionError)
+@pytest.mark.xfail(strict=True)
 def test_count_matches_3() -> None:
-    assert count_matches(["hey", "hey", "hey"], "hey") == 3
+    "YOUR TEST THAT CAUSES A FAILURE HERE"
 
 
 def test_find_in_list_1() -> None:
@@ -90,9 +90,9 @@ def test_find_in_list_2() -> None:
     assert find_in_list([1, 3, 5, 7], 4) == False
 
 
-@pytest.mark.xfail(raises=AssertionError)
+@pytest.mark.xfail(strict=True)
 def test_find_in_list_3() -> None:
-    assert find_in_list([7, 5, 3, 1], 3) == True
+    "YOUR TEST THAT CAUSES A FAILURE HERE"
 
 
 def test_strings_are_equal_1() -> None:
@@ -103,9 +103,9 @@ def test_strings_are_equal_2() -> None:
     assert strings_are_equal("shops", "ships") == False
 
 
-@pytest.mark.xfail(raises=IndexError)
+@pytest.mark.xfail(strict=True)
 def test_strings_are_equal_3() -> None:
-    assert strings_are_equal("hellothere", "hello") == False
+    "YOUR TEST THAT CAUSES A FAILURE HERE"
 
 
 def test_max_number_1() -> None:
@@ -116,9 +116,9 @@ def test_max_number_2() -> None:
     assert max_number([3, 5, 7, 1]) == 7
 
 
-@pytest.mark.xfail(raises=IndexError)
+@pytest.mark.xfail(strict=True)
 def test_max_number_3() -> None:
-    max_number([])
+    "YOUR TEST THAT CAUSES A FAILURE HERE"
 
 
 def test_sum_evens_1() -> None:
@@ -129,6 +129,6 @@ def test_sum_evens_2() -> None:
     assert sum_evens([1, 3, 5]) == 0
 
 
-@pytest.mark.xfail(raises=AssertionError)
+@pytest.mark.xfail(strict=True)
 def test_sum_evens_3() -> None:
-    assert sum_evens([2, 4, 6]) == 12
+    "YOUR TEST THAT CAUSES A FAILURE HERE"
