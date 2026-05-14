@@ -1,13 +1,10 @@
 image: python:3.10
 
-variables:
-  PYTHONPATH: "$CI_PROJECT_DIR/src"
-
 before_script:  # Commands to run before all jobs.
   - python3 -V  # Print out python version for debugging
   - python3 -m pip || curl https://bootstrap.pypa.io/get-pip.py | python3
   - python3 -m pip install --upgrade pip
-  - python3 -m pip install pytest pytest-cov black isort
+  - python3 -m pip install -e ".[dev]"
 
 stages:
   - lint
@@ -16,8 +13,8 @@ stages:
 lint:
   stage: lint
   script:
-    - python3 -m black --line-length 120 --check .
-    - python3 -m isort -l 120 --profile black --check .
+    - python3 -m black --check .
+    - python3 -m isort --check .
 
 test:
   stage: test
