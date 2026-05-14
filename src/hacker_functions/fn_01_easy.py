@@ -4,7 +4,7 @@ def shipping_cost(weight: int, is_member: bool) -> float:
     Packages 5 pounds or under cost $10. Packages over 5 pounds cost $20.
 
     Bug: Should be `<=` in first comparison
- 
+
     :param weight: The weight of the package in pounds
     :param is_member: Whether the customer is a member
     :returns: The shipping cost as a float
@@ -13,10 +13,10 @@ def shipping_cost(weight: int, is_member: bool) -> float:
         cost = 10.0
     else:
         cost = 20.0
- 
+
     if is_member == True:
         cost = cost * 0.5
- 
+
     return cost
 
 
@@ -25,9 +25,9 @@ def rock_paper_scissors(player: str, opponent: str) -> str:
     Determine the winner of a round of rock-paper-scissors. Returns "player"
     if the player wins, "opponent" if the opponent wins, and "tie" if both
     chose the same thing.
- 
+
     Bug: Missing one of the key conditions for victory
-    
+
     :param player: The player's choice ("rock", "paper", or "scissors")
     :param opponent: The opponent's choice ("rock", "paper", or "scissors")
     :returns: "player", "opponent", or "tie"
@@ -46,9 +46,9 @@ def can_ride_coaster(height: int, age: int) -> bool:
     """
     Determine whether someone can ride the roller coaster. A rider must be
     at least 48 inches tall AND at least 8 years old.
- 
+
     Bug: Should be `and` instead of `or`
-    
+
     :param height: The rider's height in inches
     :param age: The rider's age in years
     :returns: T/F about whether the rider can ride
@@ -81,7 +81,7 @@ def first_and_last(items: list[int]) -> tuple[int, int]:
     are less than 2 items, return (0, 0)
 
     Bug: Returns first and second rather than first and last
- 
+
     :param items: The list to extract from
     :returns: A tuple of (first item, last item)
     """
@@ -98,7 +98,7 @@ def days_in_month(month: int) -> int:
     invalid months.
 
     Bug: Handles nonsensical months
- 
+
     :param month: The month number (1 = January, 12 = December)
     :returns: The number of days in that month, or -1 if invalid
     """
@@ -131,7 +131,7 @@ def last_word(sentence: str) -> str:
     For example, "hello there friend" should return "friend".
 
     Bug: Breaks for an empty string
- 
+
     :param sentence: The sentence to extract the last word from
     :returns: The last word in the sentence
     """
@@ -164,7 +164,7 @@ def count_vowels(word: str) -> int:
     Count the number of vowels in a given word
 
     Bug: Doesn't account for upper-case letters
- 
+
     :param word: The word to count vowels in
     :returns: The number of vowels in the word
     """

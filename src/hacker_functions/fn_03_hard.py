@@ -80,7 +80,7 @@ def count_unique(items: list[int]) -> int:
     For example, [1, 2, 2, 3, 3, 3] should return 3.
 
     Bug: Returns too early
- 
+
     :param items: The list to count unique items in
     :returns: The number of unique items
     """
@@ -95,8 +95,8 @@ def count_unique(items: list[int]) -> int:
         else:
             return unique_count
     return unique_count
- 
- 
+
+
 def remove_duplicates(items: list[int]) -> list[int]:
     """
     Return a new list with duplicate items removed, preserving the order
@@ -104,7 +104,7 @@ def remove_duplicates(items: list[int]) -> list[int]:
     For example, [3, 1, 4, 1, 5, 9, 2, 6, 5, 3] should return [3, 1, 4, 5, 9, 2, 6].
 
     Bug: Keeps last occurrence instead of first
- 
+
     :param items: The list to deduplicate
     :returns: A new list with duplicates removed
     """
@@ -117,15 +117,15 @@ def remove_duplicates(items: list[int]) -> list[int]:
         if not is_duplicate:
             result.append(items[i])
     return result
- 
- 
+
+
 def binary_search(sorted_items: list[int], target: int) -> int:
     """
     Search for `target` in a sorted list. Returns the index of the target
     if found, or -1 if not found.
 
     Bug: Loop bound while low < high instead of <= high
- 
+
     :param sorted_items: A list of integers in ascending order
     :param target: The integer to search for
     :returns: The index of target, or -1 if not found
@@ -141,8 +141,8 @@ def binary_search(sorted_items: list[int], target: int) -> int:
         else:
             high = mid - 1
     return -1
- 
- 
+
+
 def group_by_first_letter(words: list[str]) -> dict[str, list[str]]:
     """
     Group a list of words into a dictionary keyed by their first letter.
@@ -150,7 +150,7 @@ def group_by_first_letter(words: list[str]) -> dict[str, list[str]]:
     {"a": ["apple", "ant"], "b": ["bee"], "c": ["cat", "cow"]}.
 
     Bug: Assumes words are non-zero
- 
+
     :param words: The list of words to group
     :returns: A dictionary mapping first letters to lists of words
     """
@@ -161,13 +161,13 @@ def group_by_first_letter(words: list[str]) -> dict[str, list[str]]:
             groups[first] = []
         groups[first].append(word)
     return groups
- 
- 
+
+
 def longest_streak(numbers: list[int]) -> int:
     """
     Return the length of the longest streak of consecutive equal numbers.
     For example, [1, 1, 2, 2, 2, 3, 3] should return 3 (the three 2's).
- 
+
     :param numbers: The list of integers to scan
     :returns: The length of the longest run of equal consecutive values
     """

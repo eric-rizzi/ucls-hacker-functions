@@ -166,7 +166,7 @@ def sum_evens(numbers: list[int]) -> int:
     For example, [1, 2, 3, 4, 5] should return 6 (2 + 4).
 
     Bug: `total` isn't being added to
- 
+
     :param numbers: The list of integers to scan
     :returns: The sum of the even numbers
     """

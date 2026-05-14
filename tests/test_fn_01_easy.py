@@ -52,6 +52,7 @@ def test_can_ride_coaster_2() -> None:
 def test_can_ride_coaster_3() -> None:
     assert can_ride_coaster(50, 5) == False
 
+
 def test_average_1() -> None:
     assert average([5, 6, 7]) == 6.0
 
@@ -86,6 +87,7 @@ def test_days_in_month_2() -> None:
 def test_days_in_month_3() -> None:
     assert days_in_month(13) == -1
 
+
 def test_contains_a_1() -> None:
     assert contains_an_a("hello") == False
 
@@ -106,6 +108,7 @@ def test_last_word_1() -> None:
 @pytest.mark.xfail(raises=IndexError)
 def test_last_word_2() -> None:
     last_word("")
+
 
 def test_triangle_type_1() -> None:
     assert triangle_type(3, 3, 3) == "Equilateral"
