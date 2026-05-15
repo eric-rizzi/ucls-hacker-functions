@@ -1,22 +1,23 @@
-def convert_to_usd(num_dollars: int, currency: str) -> float:
+def convert_from_usd(num_dollars: int, currency: str) -> float:
     """
     Calculate how much money a certain number of dollars would be in another
     denomination
 
+    Hint: The test to "uncover" the bug **does not** require an assert
     Bug: Fails to handle cases where currency is not in rates dictionary
 
     :param num_dollars: The number of dollars to convert
     :param currency: The currency to convert to
     """
-    # Converts an amount from a specified currency to USD.
-    rates = {"EUR": 1.1, "JPY": 0.0091}
+    rates = {"EUR": 0.9, "JPY": 158.1}
     return num_dollars * rates[currency]
 
 
 def is_valid_email(email: str) -> bool:
     """
-    Determines whether a given string is a valid email address
+    Determine whether a given string is a valid email address
 
+    Hint: The test to "uncover" the bug will require an `assert`
     Bug: Doesn't validate that there's content before the @
 
     :param email: Potential email address
@@ -27,12 +28,12 @@ def is_valid_email(email: str) -> bool:
 
 def sum_of_digits(n: int) -> int:
     """
-    Adds up all of the digits in a particular number. For example, 12 would
-    result in `3` (1 + 2) being returned.
+    Add up all of the digits in a particular number. For example, 125 would
+    result in `8` (1 + 2 + 5) being returned.
 
     Bug: Fails to account for negative numbers
 
-    :params n: the number to process
+    :param n: the number to process
     :returns: The sum of the digits in `n`
     """
     return sum(int(char) for char in str(n))
@@ -90,10 +91,12 @@ def count_unique(items: list[int]) -> int:
         for j in range(i):
             if items[i] == items[j]:
                 is_unique = False
+
         if is_unique:
             unique_count += 1
         else:
             return unique_count
+
     return unique_count
 
 
@@ -114,8 +117,10 @@ def remove_duplicates(items: list[int]) -> list[int]:
         for j in range(i + 1, len(items)):
             if items[i] == items[j]:
                 is_duplicate = True
+
         if not is_duplicate:
             result.append(items[i])
+
     return result
 
 
@@ -140,6 +145,7 @@ def binary_search(sorted_items: list[int], target: int) -> int:
             low = mid + 1
         else:
             high = mid - 1
+
     return -1
 
 
@@ -149,7 +155,7 @@ def group_by_first_letter(words: list[str]) -> dict[str, list[str]]:
     For example, ["apple", "ant", "bee", "cat", "cow"] should return
     {"a": ["apple", "ant"], "b": ["bee"], "c": ["cat", "cow"]}.
 
-    Bug: Assumes words are non-zero
+    Bug: Assumes no empty strings
 
     :param words: The list of words to group
     :returns: A dictionary mapping first letters to lists of words
@@ -159,7 +165,9 @@ def group_by_first_letter(words: list[str]) -> dict[str, list[str]]:
         first = word[0]
         if first not in groups:
             groups[first] = []
+
         groups[first].append(word)
+
     return groups
 
 
@@ -182,4 +190,5 @@ def longest_streak(numbers: list[int]) -> int:
                 longest = current
         else:
             current = 1
+
     return longest

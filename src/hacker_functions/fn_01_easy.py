@@ -1,9 +1,19 @@
 def shipping_cost(weight: int, is_member: bool) -> float:
     """
     Calculate the shipping cost for a package. Members get a 50% discount.
-    Packages 5 pounds or under cost $10. Packages over 5 pounds cost $20.
+    Packages *5 pounds or under* cost $10. Packages *over 5 pounds* cost $20.
 
     Bug: Should be `<=` in first comparison
+
+    Note: This problem is intended as demonstration to show that bugs can come
+    from improperly implemented specs. In these, cases, you job is to create a
+    test that highlights the bad implementation. The test will look like:
+
+    ```
+    @pytest.mark.xfail
+    def test_shipping_cost_spec_fail() -> None:
+        assert shipping_cost(int, bool) == int  # This will raise an AssertionError
+    ```
 
     :param weight: The weight of the package in pounds
     :param is_member: Whether the customer is a member
@@ -20,12 +30,35 @@ def shipping_cost(weight: int, is_member: bool) -> float:
     return cost
 
 
+def add_first_three(numbers: list[int]) -> int:
+    """
+    Sum the first three numbers in a list
+
+    Bug: Can't handle lists with less than three elements
+
+    Note: This problem is intended as a demonstration to show that bugs can come
+    from particular inputs leading to actual Exception/Errors in the program.
+    The test will look like:
+
+    ```
+    @pytest.mark.xfail
+    def test_shipping_cost_spec_fail() -> None:
+        add_first_three([...])
+    ```
+
+    :param numbers: List of integers
+    :returns: The sum of the first three ints in list
+    """
+    return numbers[0] + numbers[1] + numbers[2]
+
+
 def rock_paper_scissors(player: str, opponent: str) -> str:
     """
     Determine the winner of a round of rock-paper-scissors. Returns "player"
     if the player wins, "opponent" if the opponent wins, and "tie" if both
     chose the same thing.
 
+    Hint: The test to "uncover" the bug will require an `assert`
     Bug: Missing one of the key conditions for victory
 
     :param player: The player's choice ("rock", "paper", or "scissors")
@@ -47,6 +80,7 @@ def can_ride_coaster(height: int, age: int) -> bool:
     Determine whether someone can ride the roller coaster. A rider must be
     at least 48 inches tall AND at least 8 years old.
 
+    Hint: The test to "uncover" the bug will require an `assert`
     Bug: Should be `and` instead of `or`
 
     :param height: The rider's height in inches
@@ -63,6 +97,7 @@ def average(numbers: list[int]) -> float:
     """
     Get the average of a list of integers. Returns 0 if the list is empty.
 
+    Hint: The test to "uncover" the bug **does not** require an assert
     Bug: Guard doesn't work so get DivisionByZero
 
     :param numbers: List of integers
@@ -80,6 +115,7 @@ def first_and_last(items: list[int]) -> tuple[int, int]:
     For example, [3, 7, 2, 9] should return (3, 9). If there
     are less than 2 items, return (0, 0)
 
+    Hint: The test to "uncover" the bug will require an `assert`
     Bug: Returns first and second rather than first and last
 
     :param items: The list to extract from
@@ -97,6 +133,7 @@ def days_in_month(month: int) -> int:
     28 days (ignore leap years). Months are numbered 1-12. Returns -1 for
     invalid months.
 
+    Hint: The test to "uncover" the bug will require an `assert`
     Bug: Handles nonsensical months
 
     :param month: The month number (1 = January, 12 = December)
@@ -104,14 +141,16 @@ def days_in_month(month: int) -> int:
     """
     if month in [1, 3, 5, 7, 8, 10, 12]:
         return 31
+
     if month in [4, 6, 9, 11]:
         return 30
+
     return 28
 
 
 def contains_an_a(word: str) -> bool:
     """
-    Checks whether a given string contains an "a" character
+    Check whether a given string contains an "a" character
 
     Bug: Assumes that words can't be over 100 chars in length
 
@@ -173,4 +212,5 @@ def count_vowels(word: str) -> int:
     for letter in word:
         if letter in vowels:
             count += 1
+
     return count

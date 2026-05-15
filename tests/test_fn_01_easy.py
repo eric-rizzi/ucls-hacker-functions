@@ -1,6 +1,7 @@
 import pytest
 
 from hacker_functions.fn_01_easy import (
+    add_first_three,
     average,
     can_ride_coaster,
     contains_an_a,
@@ -25,6 +26,15 @@ def test_shipping_cost_2() -> None:
 @pytest.mark.xfail(raises=AssertionError)
 def test_shipping_cost_3() -> None:
     assert shipping_cost(5, False) == 10.0
+
+
+def test_add_first_three_1() -> None:
+    assert add_first_three([1, 4, 6, 1, 2]) == 11
+
+
+@pytest.mark.xfail(raises=IndexError)
+def test_add_first_three_2() -> None:
+    add_first_three([1, 4])
 
 
 def test_rock_paper_scissors_1() -> None:

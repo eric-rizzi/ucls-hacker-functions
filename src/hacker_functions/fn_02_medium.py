@@ -2,9 +2,10 @@ def categorize_grade(grade: int) -> str:
     """
     Translate a number grade to a letter grade
 
+    Hint: The test to "uncover" the bug will require an `assert`
     Bug: Logic error due to an `elif` being mistyped as an `if`
 
-    :param grade: The current grade of the student as an integer
+    :param grade: The current grade of the student as an int
     :returns: The string letter grade (e.g., "C+")
     """
     letter_grade = ""
@@ -42,6 +43,7 @@ def capitalize_first(s: str) -> str:
     """
     Capitalize the first letter of a word/sentence
 
+    Hint: The test to "uncover" the bug **does not** require an assert
     Bug: Fails when s is empty
 
     :param s: The word/sentence to capitalize
@@ -50,13 +52,31 @@ def capitalize_first(s: str) -> str:
     return s[0].upper() + s[1:]
 
 
+def is_palindrome(word: str) -> bool:
+    """
+    Checks whether a given word is a palindrome or not
+
+    Hint: The test to "uncover" the bug will require an `assert`
+    Bug: Only checks whether the first letters are the same
+
+    :param word: The word to check for palindrome-ness
+    :returns: T/F of whether the word is a palindrome
+    """
+    for i in range(len(word) // 2):
+        if word[i] == word[-1 + -i]:
+            return True
+
+    return False
+
+
 def find_middle(a: int, b: int, c: int) -> int:
     """
     Find the second largest of three numbers. For example, given the inputs
     (3, 6, 5), the function would return 5 since it's the second largest -
     middle number.
 
-    Bug: Doesn't check for <=
+    Hint: The test to "uncover" the bug will require an `assert`
+    Bug: Doesn't check for `<=`
 
     :param a: First integer
     :param b: Second integer
@@ -77,53 +97,39 @@ def find_middle(a: int, b: int, c: int) -> int:
         return b
 
 
-def is_palindrome(word: str) -> bool:
+def count_matches(lst: list[str], word: str) -> int:
     """
-    Checks whether a given word is a palindrome or not
-
-    Bug: Only checks whether the first letters are the same
-
-    :param word: The word to check for palindrome-ness
-    :returns: T/F of whether the word is a palindrome
-    """
-    for i in range(len(word) // 2):
-        if word[i] == word[-1 + -i]:
-            return True
-
-    return False
-
-
-def count_matches(l: list[str], word: str) -> int:
-    """
-    Count the number of times a given word appears in a list of words
+    Count the number of times a given word appears in a list of strings
 
     Bug: Off by one error
 
-    :param l: The list of strings/words
+    :param lst: The list of strings/words
     :param word: The word to look for matches for
     """
     matches = 0
-    for i in range(len(l) - 1):
-        if l[i] == word:
+    for i in range(len(lst) - 1):
+        if lst[i] == word:
             matches += 1
+
     return matches
 
 
-def find_in_list(lst: list[int], item: int) -> bool:
+def find_in_list(lst: list[int], seach_num: int) -> bool:
     """
     Determines whether a given item appears in a list
 
     Bug: Function returns False too early
 
     :param lst: A list of integers
-    :param item: The item to look for in the list
+    :param seach_num: The item to look for in the list
     :returns: T/F about whether the item is in the list
     """
-    for i in lst:
-        if i == item:
+    for list_num in lst:
+        if list_num == seach_num:
             return True
-        elif i > item:
+        elif list_num > seach_num:
             return False
+
     return False
 
 
@@ -157,6 +163,7 @@ def max_number(numbers: list[int]) -> int:
     for num in numbers[1:]:
         if num > max_num:
             max_num = num
+
     return max_num
 
 
@@ -165,7 +172,7 @@ def sum_evens(numbers: list[int]) -> int:
     Return the sum of all even numbers in the list.
     For example, [1, 2, 3, 4, 5] should return 6 (2 + 4).
 
-    Bug: `total` isn't being added to
+    Bug: `total` isn't being accumulated properly
 
     :param numbers: The list of integers to scan
     :returns: The sum of the even numbers
@@ -174,4 +181,5 @@ def sum_evens(numbers: list[int]) -> int:
     for n in numbers:
         if n % 2 == 0:
             total = n
+
     return total

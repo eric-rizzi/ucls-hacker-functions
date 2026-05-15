@@ -2,7 +2,7 @@ import pytest
 
 from hacker_functions.fn_03_hard import (
     binary_search,
-    convert_to_usd,
+    convert_from_usd,
     count_unique,
     find_median,
     group_by_first_letter,
@@ -14,17 +14,17 @@ from hacker_functions.fn_03_hard import (
 )
 
 
-def test_convert_to_usd_1() -> None:
-    assert convert_to_usd(10, "EUR") == 11.0
+def test_convert_from_usd_1() -> None:
+    assert convert_from_usd(10, "EUR") == 9.0
 
 
-def test_convert_to_usd_2() -> None:
-    assert convert_to_usd(100, "JPY") == 0.91
+def test_convert_from_usd_2() -> None:
+    assert convert_from_usd(100, "JPY") == 15810.0
 
 
 @pytest.mark.xfail(raises=KeyError)
-def test_convert_to_usd_3() -> None:
-    assert convert_to_usd(10, "HSD") == 10
+def test_convert_from_usd_3() -> None:
+    assert convert_from_usd(10, "HSD") == 10
 
 
 def test_is_valid_email_1() -> None:
